@@ -1,0 +1,92 @@
+{
+    "position": "left",
+    "layer": "top",
+    "width": 64,
+    "output": [ "eDP-1","HDMI-A-1" ],
+    "modules-left": ["custom/arch","custom/fanprofiles","cpu","memory","custom/separator","tray"],
+    "modules-center": ["wlr/workspaces"],
+    "modules-right": ["network","bluetooth","backlight","pulseaudio","battery", "custom/separator", "clock", "custom/power"],
+    "wlr/workspaces": {
+        "all-outputs": true,
+	    "format": "{name}",
+        "sort-by-number": true,
+    },
+    "custom/power": {
+        "format": "⏻",
+        "on-click": "systemctl suspend",
+    },
+    "clock": {
+        "format": "{:%H\n%M}",
+        "today-format": "<span color='#ff6699'><b><u>{}</u></b></span>",
+        "format-calendar": "<span color='#ecc6d9'><b>{}</b></span>",
+        "format-calendar-weeks": "<span color='#99ffdd'><b>W{:%U}</b></span>",
+        "format-calendar-weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>",
+        "on-scroll": {
+            "calendar": 1,
+            "calendar": -1,
+        }
+    },
+    "custom/arch": {
+	"format": "",
+	"on-click": "wofi --show run",
+    },
+    "custom/fanprofiles": {
+    	"interval": "once",
+    	"signal": 8,
+	"format": "{}",
+	"exec": "~/.config/waybar/fanprofiles.sh",
+	"escape": true,
+    },
+    "custom/separator": {
+	"format": "──────",
+    },
+    "cpu": {
+    	"format": " {icon}",
+	"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    },
+    "memory": {
+	"format": " {icon}",
+	"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+    },
+    "backlight": {
+    	"format": "{icon}",
+	"format-icons": [ "","","","","","","" ],
+	"tooltip": true,
+	"tooltip-format": "{percent}%",
+    },
+    "pulseaudio": {
+    	"format": "{icon}",
+	"format-icons": [ "奄","奔","墳" ],
+	"format-muted": "ﱝ",
+	"tooltip": true,
+	"tooltip-format": "{volume}%",
+    },
+    "battery": {
+	"format" : "{icon} ",
+	"format-Charging": "ﮣ",
+	"full-at": 80,
+	"tooltip": true,
+	"tooltip-format": "{capacity}%",
+	"states": {
+        	"warning": 30,
+        	"critical": 15
+    	},
+	"format-icons" : [ "","","","","" ],
+    },
+    "network": {
+        "format": "",
+    	"format-wifi" : "直",
+	    "format-disconnected": "睊",
+	    "tooltip": true,
+	    "tooltip-format": "{essid}\n{signalStrength} UP:{bandwidthUpBytes} DOWN:{bandwidthDownBytes}",
+	    "on-click": "networkmanager_dmenu",
+    },
+    "bluetooth": {
+    	"format-on": "",
+	    "format-off": "",
+	"format-disabled": "",
+	"format-connected": "",
+	"on-click" : "dmenu-bluetooth",
+    },
+}
